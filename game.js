@@ -1,3 +1,7 @@
+/*
+You, the player must catch the maximum number of mice under one minute
+*/
+
 const player = "p"
 const floor = "f";
 const mouse = "m";
@@ -47,6 +51,60 @@ const mouseSound = tune`
 787.5`;
 const playBackgroundTune = playTune(backgroundTune, Infinity);
 
+setLegend(
+  [ player, bitmap`
+................
+................
+................
+................
+......00.....0..
+......010...090.
+......0110009900
+.00..01111229990
+020..01112222990
+010..02220220220
+0120.02220220220
+.02200022222220.
+..099920000000..
+...092221112220.
+...022222222220.
+...020200002020.`],
+  [ floor, bitmap`
+111L1111111L1111
+111L1111111L1111
+111L1111111L1111
+LLLLLLLLLLLLLLLL
+1111111L1111111L
+1111111L1111111L
+1111111L1111111L
+LLLLLLLLLLLLLLLL
+111L1111111L1111
+111L1111111L1111
+111L1111111L1111
+LLLLLLLLLLLLLLLL
+1111111L1111111L
+1111111L1111111L
+1111111L1111111L
+LLLLLLLLLLLLLLLL` ],
+  [ mouse, bitmap`
+................
+................
+................
+................
+................
+................
+................
+.......000.00...
+......08810LL0..
+......08810LL0..
+......088111110.
+..00..008810100.
+.08800LLL11111C0
+08008LLLLL11880.
+.0..0LLLLLLL00..
+.....0L00LL0....` ]
+)
+
 setSolids([player])
 
 let level = 0
@@ -89,6 +147,9 @@ onInput("a", () => {
   getFirst(player).x -= 1
 })
 
+let score = 0;
+addText(`Score: ${score}`, {x: 10, y: 0, color:color`2`});
+
 const mouseSprite = getFirst(mouse);
 
 function randomizeCoordinatesMouse() {
@@ -119,14 +180,7 @@ function countdown() {
 randomizeCoordinatesMouse();
 countdown();
 
-let score = 0;
-addText(`Score: ${score}`, {x: 10, y: 0, color:color`2`});
 afterInput(() => {
-  if(tilesWith(mouse, player).length >= 1) {
-    score++;
-  };
-
-  afterInput(() => {
   if(tilesWith(mouse, player).length >= 1) {
     score++;
     playTune(mouseSound);
