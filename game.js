@@ -106,7 +106,27 @@ function randomizeCoordinatesMouse() {
   addText(`Score: ${score}`, {x: 10, y: 0, color:color`2`});
 }
 
+let seconds = 60;
+addText(`Time: ${seconds}`, {x: 10, y: 1, color:color`2`});
+
+function countdown() {
+  const timer = setInterval(() => {
+    seconds--;
+    addText(`Time: ${seconds}`, {x: 10, y: 1, color:color`2`});
+    
+    if (seconds == 0) {
+      clearInterval(timer);
+      clearText();
+      addText(`Time's up!`, {x: 6, y: 7, color:color`2`});
+      addText(`You caught`, {x: 6, y: 8, color:color`2`});
+      addText(`${score} mice`, {x: 7, y: 9, color:color`2`});
+      playBackgroundTune.end();
+    }
+  }, 1000)
+}
+
 randomizeCoordinatesMouse();
+countdown();
 
 let score = 0;
 addText(`Score: ${score}`, {x: 10, y: 0, color:color`2`});
