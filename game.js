@@ -98,6 +98,16 @@ onInput("a", () => {
   getFirst(player).x -= 1
 })
 
+const mouseSprite = getFirst(mouse);
+
+function randomizeCoordinatesMouse() {
+  mouseSprite.x = Math.floor(Math.random() * 7);
+  mouseSprite.y = Math.floor(Math.random() * 7);
+  addText(`Score: ${score}`, {x: 10, y: 0, color:color`2`});
+}
+
+randomizeCoordinatesMouse();
+
 let score = 0;
 addText(`Score: ${score}`, {x: 10, y: 0, color:color`2`});
 afterInput(() => {
