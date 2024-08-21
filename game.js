@@ -97,3 +97,10 @@ onInput("a", () => {
   console.log(getFirst(player).x);
   getFirst(player).x -= 1
 })
+
+let score = 0;
+addText(`Score: ${score}`, {x: 10, y: 0, color:color`2`});
+afterInput(() => {
+  if(tilesWith(mouse, player).length >= 1) {
+    score++;
+  };
